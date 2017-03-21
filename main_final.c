@@ -72,7 +72,8 @@ void turnRight(){
 
 /* Face Functions */
 void happyFace() {
-	
+	drawBmpfile(0, 127, "Big smile");
+	sleep(2000);
 	
 	
 }
@@ -82,7 +83,8 @@ void dizzyFace(){
 	
 }
 void readyFace(){
-	
+	drawBmpfile(0, 127, "Black eye");
+	sleep(2000);	
 	
 	
 }
