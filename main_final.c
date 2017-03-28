@@ -4,6 +4,9 @@
    Authors: Nataniel, Alexander, Raymond.
    APSC 142
 
+   This program runs a roller coaster simulation based off the colours on the ground.
+   Use walls to on 45 degree angles for the robot to bump off of to que it to do a 90 degree turn.
+
 */
 
 //Colour detections
@@ -32,51 +35,60 @@ bool work = true;
 
 task main()
 {
-	//	int count=0;
-	//	int colourCode;
-	
-	spiral();
-	wait1Msec(100);
-	
-/*	while(clap<50)
-	{
-		readyface();
-		
-	}
-	
-	while(count<2000)
-	{
-		count = count + 1;
-		wait1Msec(2);
-	}
-*/	
+	int count = 0;
+	int colourCode;
+  int soundLevel = 0;
+  int touch = 0;
+
+ 	colourCode = getColorName(S1); 		//Retrieves the colour name from sensor
+
+  // Set sensor type
+  SensorType[S1] = sensorEV3_Color;
+  SensorType[S2] = sensorEV3_Touch;
+  SensorType[S3] = sensorEV3_Touch;
+  SensorType[S4] = sensorSoundDB;
+
+  wait1Msec(1000);									//Initialize the sound sensor
+
+  soundLevel = SensorValue[sensorSoundDB];		//Set sound level
+
+  while(soundLevel <= 90){       //Wait for loud clap
+  		readyFace();
+  		wait1Msec(30);
 }
+  happyFace();
 
+	wait1Msec(5000);
 
+  while(soundLevel >= 50){       //Wait for loud clap to stop. Contains main function
+
+	}
+
+}
 
 /* Colour Functions */
 
 void greenDownhill(){
-	
+
 }
 
 void blueUphill(){
-	
+
 }
 
 void redLoop(){
-	
+
 }
 
 
 /* Turn Functions */
 
 void turnLeft(){
-	
+
 }
 
 void turnRight(){
-	
+
 }
 
 
@@ -84,25 +96,25 @@ void turnRight(){
 void happyFace() {
 		drawBmpfile(0, 127, "Big smile");
 		sleep(2000);
-	
-	
+
+
 }
 void dizzyFace(){
-	
-	
-	
+
+	spiral();
+
 }
 void readyFace(){
 		drawBmpfile(0, 127, "Black eye");
-		sleep(2000);	
-	
-	
+		sleep(2000);
+
+
 }
 
 /* Spiral */
 
 void spiral()
-{	
+{
 	eraseDisplay();
 	while (work)
 	{
@@ -118,7 +130,7 @@ void spiral()
 			float xSin2,x1Sin2;
 			float yCos2,y1Cos2;
 			float fRadians,f1Radians;
-			
+
 			fRadians = xAngle * PI /(float) 180.0;
 			f1Radians = yAngle * PI /(float) 180.0;
 			xSin1 = sin(f1Radians);
@@ -141,7 +153,7 @@ void spiral()
 			++xAngle;
 			++yAngle;
 		}
-		
+
 		// Erase the spiral
 		while(xRadius <= 32)
 		{
@@ -158,7 +170,7 @@ void spiral()
 			--yAngle;
 			work = false;
 		}
-		
+
 	}
-	
+
 }
