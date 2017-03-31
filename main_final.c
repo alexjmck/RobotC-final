@@ -37,78 +37,79 @@ task main()
 {
 	int count = 0;
 	int colourCode;
-  int soundLevel = 0;
-  int touch = 0;
-
- 	colourCode = getColorName(S1); 		//Retrieves the colour name from sensor
-
-  // Set sensor type
-  SensorType[S1] = sensorEV3_Color;
-  SensorType[S2] = sensorEV3_Touch;
-  SensorType[S3] = sensorEV3_Touch;
-  SensorType[S4] = sensorSoundDB;
-
-  wait1Msec(1000);									//Initialize the sound sensor
-
-  soundLevel = SensorValue[sensorSoundDB];		//Set sound level
-
-  while(soundLevel <= 90){       //Wait for loud clap
-  		readyFace();
-  		wait1Msec(30);
-}
-  happyFace();
-
-	wait1Msec(5000);
-
-  while(soundLevel >= 50){       //Wait for loud clap to stop. Contains main function
-
+	int soundLevel = 0;
+	int touch = 0;
+	
+	colourCode = getColorName(S1); 		//Retrieves the colour name from sensor
+	
+	// Set sensor type
+	SensorType[S1] = sensorEV3_Color;
+	SensorType[S2] = sensorEV3_Touch;
+	SensorType[S3] = sensorEV3_Touch;
+	SensorType[S4] = sensorSoundDB;
+	
+	wait1Msec(1000);								//Gives time to initialize the sound sensor
+	
+	soundLevel = SensorValue[sensorSoundDB];		//Set sound level
+	
+	while(soundLevel <= 90){	//Wait for loud clap
+		readyFace();
+		wait1Msec(30);
 	}
-
+	
+	happyFace();
+	
+	wait1Msec(5000);
+	
+	while(soundLevel >= 50){	//Wait for loud clap to stop. Contains main function
+		
+	}
+	
 }
 
 /* Colour Functions */
 
 void greenDownhill(){
-
+	
 }
 
 void blueUphill(){
-
+	
 }
 
 void redLoop(){
-
+	
 }
 
 
 /* Turn Functions */
 
 void turnLeft(){
-
+	
 }
 
 void turnRight(){
-
+	
 }
 
 
 /* Face Functions */
 void happyFace() {
-		drawBmpfile(0, 127, "Big smile");
-		sleep(2000);
-
-
+	drawBmpfile(0, 127, "Big smile");
+	sleep(2000);
+	
+	
 }
 void dizzyFace(){
-
+	
 	spiral();
-
+	
 }
 void readyFace(){
-		drawBmpfile(0, 127, "Black eye");
-		sleep(2000);
-
-
+	drawBmpfile(0, 127, "Black eye");
+	sleep(2000);
+	
+	
 }
 
 /* Spiral */
@@ -130,7 +131,7 @@ void spiral()
 			float xSin2,x1Sin2;
 			float yCos2,y1Cos2;
 			float fRadians,f1Radians;
-
+			
 			fRadians = xAngle * PI /(float) 180.0;
 			f1Radians = yAngle * PI /(float) 180.0;
 			xSin1 = sin(f1Radians);
@@ -153,7 +154,7 @@ void spiral()
 			++xAngle;
 			++yAngle;
 		}
-
+		
 		// Erase the spiral
 		while(xRadius <= 32)
 		{
@@ -170,7 +171,7 @@ void spiral()
 			--yAngle;
 			work = false;
 		}
-
+		
 	}
-
+	
 }
