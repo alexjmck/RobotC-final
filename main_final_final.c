@@ -1,11 +1,16 @@
 
 
-/* Final project.
+/* Final project - Legend of Zelda Roller Coaster
 Authors: Nataniel, Alexander, Raymond.
 APSC 142
 
+This program will begin waiting for a clap. Then it will play A shortened Legend of Zelda Theme song.
+
 This program runs a roller coaster simulation based off the colours on the ground.
+
 Use walls to on 45 degree angles for the robot to bump off of to que it to do a 90 degree turn.
+
+Musical Note dictionary primarily sourced from Tinkernology.blogspot.com and various other sources.
 
 */
 
@@ -16,6 +21,109 @@ Use walls to on 45 degree angles for the robot to bump off of to que it to do a 
 
 int speedIntitial = 31;
 int speedReverse = -31;
+
+// Musical note dictionary. Each note mapped to a frequency
+// Frequency (note)
+// Example: A_3 is A in the third octave
+// Ash_3 is A# in the third octave
+int C_3 = 261;
+int Csh_3 = 275;
+int D_3 = 293;
+int Dsh_3 = 310;
+int E_3 = 329;
+int F_3 = 348;
+int Fsh_3 = 370;
+int G_3 = 392;
+int Gsh_3 = 412;
+int A_3 = 440;
+int Ash_3 = 466;
+int B_3 = 496;
+int C_4 = 524;
+int Csh_4 = 555;
+int D_4 = 590;
+int Dsh_4 = 621;
+int E_4 = 656;
+int F_4 = 695;
+int Fsh_4 = 738;
+int G_4 = 788;
+int Gsh_4 = 830;
+int A_4 = 877;
+int Ash_4 = 929;
+int B_4 = 987;
+int C_5 = 1054;
+int Csh_5 = 1104;
+int D_5 = 1188;
+int Dsh_5 = 1251;
+int E_5 = 1322;
+int F_5 = 1401;
+int Fsh_5 = 1488;
+int G_5 = 1590;
+int Gsh_5 = 1646;
+int A_5 = 1770;
+int Ash_5 = 1841;
+int B_5 = 1995;
+
+// Note Length Reference
+int Dwhole = 200;
+int Whole = 100;
+int Half = 50;
+int Quarter = 25;
+int Eighth = 13;
+int Sixteenth = 6;
+
+// Legend of Zelda Theme song array
+int Notes[][]= //currently ?Ode to Joy?, Change these notes for a new song
+{
+	{	Ash_3, Quarter},
+	{	F_3, Half},
+	{	Ash_3, Sixteenth},
+	{	Ash_3, Sixteenth},
+	{	C_4, Sixteenth},
+	{	D_4, Sixteenth},
+	{	Dsh_4, Sixteenth},
+	{	F_4, Half},
+	{	F_4, Eighth},
+	{	F_4, Eighth},
+	{	Fsh_4, Eighth},
+	{	Gsh_4, Eighth},
+	{	Ash_4, Half},
+	{	Ash_4, Eighth},
+	{	Ash_4, Eighth},
+	{	Ash_4, Eighth},
+	{	Gsh_4, Eighth},
+	{	Fsh_4, Eighth},
+	{	Gsh_4, Eighth},
+	{	Fsh_4, Eighth},
+	{	F_4, Half},
+	{	F_4, Quarter},
+	{	Dsh_4, Eighth},
+	{	Dsh_4, Sixteenth},
+	{	F_4, Sixteenth},
+	{	Fsh_4, Half},
+	{	F_4, Eighth},
+	{	Dsh_4, Eighth},
+	{	Csh_4, Eighth},
+	{	Csh_4, Sixteenth},
+	{	Dsh_4, Sixteenth},
+	{	F_4, Half},
+	{	Dsh_4, Eighth},
+	{	Csh_4, Eighth},
+	{	C_4, Eighth},
+	{	C_4, Sixteenth},
+	{	D_4, Sixteenth},
+	{	E_4, Half},
+	{	G_4, Quarter},
+	{	F_4, Eighth},
+	{	F_3, Sixteenth},
+	{	F_3, Sixteenth},
+	{	F_3, Eighth},
+	{	F_3, Sixteenth},
+	{	F_3, Sixteenth},
+	{	F_3, Eighth},
+	{	F_3, Sixteenth},
+	{	F_3, Sixteenth},
+	{	F_3, Quarter},
+};
 
 // Predeterminged Wait Times
 
@@ -77,6 +185,14 @@ bool highsound =false;
      highsound = true;
     }
    }
+// Music Program playing Legend of Zelda theme.
+
+  for (int i=0; i<48; i++) //Number is number of notes in song.
+	{
+		playTone(Notes[i][0], Notes[i][1]);
+		while(bSoundActive)
+		wait1Msec(20);
+	}
 
 	forwardDrive(forwardspeed);
 	happyFace();
