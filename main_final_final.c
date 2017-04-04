@@ -72,7 +72,7 @@ int Eighth = 13;
 int Sixteenth = 6;
 
 // Legend of Zelda Theme song array
-int Notes[][]= //currently ?Ode to Joy?, Change these notes for a new song
+int Notes[][]= //currently "Legend of Zelda", Change these notes for a new song
 {
 	{	Ash_3, Quarter},
 	{	F_3, Half},
@@ -125,6 +125,7 @@ int Notes[][]= //currently ?Ode to Joy?, Change these notes for a new song
 	{	F_3, Quarter},
 };
 
+
 // Predeterminged Wait Times
 
 #define TURN_DURATION 1000
@@ -151,8 +152,8 @@ bool work = true;
 
 task main()
 {
-	int speedIntitial = 31;
-	int speedReverse = -31;
+	//	int speedIntitial = 31;
+	//	int speedReverse = -31;
 	int count = 0;
 	int colourCode;
 	int soundLevel = 0;
@@ -163,40 +164,40 @@ task main()
 	int forwardSpeed = 40;			// speed for forward driving
 	int driveTime = 2000;
 	int waitTime = 100;
-int soundspeed = 0;
-bool highsound =false;
-
+	int soundspeed = 0;
+	bool highsound =false;
+	
 	// Set sensor type
 	SensorType[S1] = sensorEV3_Color;
 	SensorMode[S1] = modeEV3Color_Color;
 	SensorType[S2] = sensorEV3_Touch;
 	SensorType[S3] = sensorEV3_Touch;
 	SensorType[S4] = sensorSoundDB;
-
+	
 	wait1Msec(1000);		//Gives time to initialize the sound sensor
-
-   while(highsound == false)            // Infinite loop
-   {
-    sadFace();
-    wait1Msec(10);
-    soundspeed = SensorValue[S4];
-    if (soundspeed > 20)
-    {
-     highsound = true;
-    }
-   }
-// Music Program playing Legend of Zelda theme.
-
-  for (int i=0; i<48; i++) //Number is number of notes in song.
+	
+	while(highsound == false)            // Infinite loop
+	{
+		sadFace();
+		wait1Msec(10);
+		soundspeed = SensorValue[S4];
+		if (soundspeed > 20)
+		{
+			highsound = true;
+		}
+	}
+	// Music Program playing Legend of Zelda theme.
+	
+	for (int i=0; i<49; i++) //Number is number of notes in song.
 	{
 		playTone(Notes[i][0], Notes[i][1]);
 		while(bSoundActive)
-		wait1Msec(20);
+			wait1Msec(20);
 	}
-
-	forwardDrive(forwardspeed);
+	
+	forwardDrive(forwardSpeed);
 	happyFace();
-
+	
 	for (int i = 0; i < 20; i++)
 	{
 		colourCode = getColorName(S1);
@@ -204,7 +205,7 @@ bool highsound =false;
 		Rightbump = getTouchValue(S3);
 		touchStatusCode = Leftbump + (2 * Rightbump);
 		wait1Msec(50);
-
+		
 		// Loopdeloop
 		if (colourCode == colorBlue)
 		{
@@ -213,7 +214,7 @@ bool highsound =false;
 			loopdeloop(forwardSpeed);
 			wait1Msec(1000);
 		}
-
+		
 		//Uphill
 		else if (colourCode == colorGreen)
 		{
@@ -221,16 +222,16 @@ bool highsound =false;
 			happyFace();
 			wait1Msec(driveTime);
 		}
-
+		
 		//downhill
 		else if (colourCode == colorRed)
 		{
 			setLEDColor(ledRed);
 			spiral();
 			wait1Msec(driveTime);
-			forwardDrive(forwardspeed);
+			forwardDrive(forwardSpeed);
 		}
-
+		
 		//move forward
 		else if (colourCode == colorYellow)
 		{
@@ -238,7 +239,7 @@ bool highsound =false;
 			happyFace();
 			wait1Msec(driveTime);
 		}
-
+		
 		//stop
 		else if (colourCode == colorBlack)
 		{
@@ -246,10 +247,10 @@ bool highsound =false;
 			sadFace();
 			stopMotor();
 			setMotorSpeed(motorD,-100);
-			 motor[motorA] = 50;
+			motor[motorA] = 50;
 			wait1Msec(driveTime);
 		}
-
+		
 		if (Leftbump == 1)
 		{
 			turnOnSpot(touchStatusCode);
@@ -273,9 +274,9 @@ void forwardDrive(int speed)
 void loopdeloop (int speed)
 {
 	setMotorSpeed(motorB, speed);
-	setMotorSpeed(motorC,(-speed);
+	setMotorSpeed(motorC,(-speed));
 	setMotorSpeed(motorB,(speed));
-	setMotorSpeed(motorC,(-speed);
+	setMotorSpeed(motorC,(-speed));
 }
 
 /* Turn Functions */
@@ -290,7 +291,7 @@ void turnOnSpot (int bump)
 	else if (bump == 2)
 	{
 		setMotorSpeed(motorB,(TURN_SPEED));
-		setMotorSpeed(motorC,(-1 * TURN_SPEED);
+		setMotorSpeed(motorC,(-1 * TURN_SPEED));
 		wait1Msec(3*1000/4);
 	}
 }
@@ -332,7 +333,7 @@ void spiral()
 			float xSin2,x1Sin2;
 			float yCos2,y1Cos2;
 			float fRadians,f1Radians;
-
+			
 			fRadians = xAngle * PI /(float) 180.0;
 			f1Radians = yAngle * PI /(float) 180.0;
 			xSin1 = sin(f1Radians);
@@ -355,7 +356,7 @@ void spiral()
 			++xAngle;
 			++yAngle;
 		}
-
+		
 		// Erase the spiral
 		while(xRadius <= 32)
 		{
@@ -372,7 +373,7 @@ void spiral()
 			--yAngle;
 			work = false;
 		}
-
+		
 	}
-
+	
 }
