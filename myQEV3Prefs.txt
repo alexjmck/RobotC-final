@@ -1,0 +1,6 @@
+auto indent format 1
+allow expert syntax 1
+enforce array bounds 1
+font typeface number 2
+chosen typesize option 1
+tab size multiplier 2

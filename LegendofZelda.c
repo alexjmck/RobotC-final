@@ -100,7 +100,7 @@ int Notes[][]= //currently "Legend of Zelda", Change these notes for a new song
 
 task main()
 {
-	for (int i=0; i<48; i++) //change the "49" to the new number of notes in the piece
+	for (int i=0; i<49; i++) //change the "49" to the new number of notes in the piece
 	{
 		playTone(Notes[i][0], Notes[i][1]);
 		while(bSoundActive);
